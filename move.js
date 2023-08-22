@@ -6,7 +6,7 @@ function move(element) {
         element.style.bottom = bottom + 'px'
     }
     
-    function moveWithArrowsKeys(left, bottom, directionChange){
+    function moveWithArrowKeys(left, bottom, callback){
         let direction = null;
         let x = left;
         let y = bottom;
@@ -19,7 +19,7 @@ function move(element) {
                 x = x -1
             }
             if(direction === 'east'){
-                x = x +10
+                x = x +1
             }
             if(direction === 'north'){
                 y = y +1
@@ -65,17 +65,16 @@ function move(element) {
             if(e.key === 'ArrowDown'){
                 direction = 'south'
             }
-            callback(directionChange)
+            callback(direction)
         })
 
         document.addEventListener('keyup', function(e){
             direction = null
-            callback(directionChange)
+            callback(direction)
         })
-        
-        return {
-            to: moveToCoordinates
-            withArrowKeys: moveWithArrowKeys
-        }
+    }
+    return {
+        to: moveToCoordinates,
+        withArrowKeys: moveWithArrowKeys
     }
 }
